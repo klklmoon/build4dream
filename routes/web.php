@@ -11,10 +11,24 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+
+/**
+ * 主站前台路由规则
+ */
+Route::group(['domain'=>'www.build4dream.com'], function(){
+    Auth::routes();
+    Route::get('/home', 'HomeController@index')->name('home');
 });
 
-Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+/**
+ * 后台路由规则
+ */
+Route::group(['domain'=>'admin.build4dream.com','namespace'=>'Admin'], function(){
+    Auth::routes();
+    Route::get('/home', 'HomeController@index')->name('home');
+ });
+
+
+
+
